@@ -21,6 +21,11 @@ def search_movie():
 
 @app.route('/api/movies',methods=['POST'])
 def add_movie():
+    request_param = request.get_json()
+    print request_param
+    validation_response = movieObj.validate_add_movie_param(request_param)
+    if validation_response : 
+        return jsonify({'message' : validation_response})
     return "API to add movies |  only access to admin"
 
 @app.route('/api/movies/<movie_id>',methods=['PUT'])
@@ -29,23 +34,28 @@ def edit_movie(movie_id):
 
 @app.route('/api/movies/<movie_id>',methods=['DELETE'])
 def delete_movie(movie_id) :
-    token_response = authObj.check_token(request)
-    if  token_response == 'Token Expired' or token_response == 'Invalid token' :
-        return jsonify({'message' : token_response})
-    if not is_admin(token_response) :
-        return jsonify({'error' : 'Unauthorized'}),403
+    #token_response = authObj.check_token(request)
+    #if  token_response == 'Token Expired' or token_response == 'Invalid token' :
+    #    return jsonify({'message' : token_response})
+    #if not is_admin(token_response) :
+    #    return jsonify({'error' : 'Unauthorized'}),403
     #write code to delete movide
-    movie_id = request.data['id']
-    return "API to delete movie | only admin access"
+    if not movie_id.isdigit():
+        return jsonify({'error' : 'Invalid movie id'})
+    movie_response = movieObj.delete_movie(movie_id)
+    return jsonify(movie_response)
 
 @app.route('/api/movies/<movie_id>',methods=['GET'])
 def get_movie(movie_id):
-    token_response = authObj.check_token(request)
-    if  token_response == 'Token Expired' or token_response == 'Invalid token' :
-        return jsonify({'message' : token_response})
+    #token_response = authObj.check_token(request)
+    #if  token_response == 'Token Expired' or token_response == 'Invalid token' :
+    #    return jsonify({'message' : token_response})
+    if not movie_id.isdigit():
+        return jsonify({'error' : 'Invalid movie id'})
     movie_response = movieObj.get_movie(movie_id)
     if not movie_response :
         return jsonify({'message' : 'Movie not found'})
+
     return jsonify(movie_response)
 
 
