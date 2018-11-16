@@ -5,8 +5,6 @@ MarkupSafe==0.23
 MySQL-python==1.2.3
 Pillow==2.3.0
 PyJWT==1.6.4
-Twisted-Core==13.2.0
-Twisted-Web==13.2.0
 Werkzeug==0.11.10
 adium-theme-ubuntu==0.3.4
 apt-xapian-index==0.45
