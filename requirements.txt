@@ -15,7 +15,6 @@ lockfile==0.8
 lxml==3.3.3
 mysql-connector-python
 numpy==1.8.2
-pyOpenSSL==0.13
 pycrypto==2.6.1
 pycurl==7.19.3
 pygobject
