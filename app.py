@@ -27,6 +27,10 @@ def search_movie():
     #add later searching based on imdb_score and 99_popularity, with lower than,greater than or equal to filter
     #this api created only for searching based on filter, and would not return anything if filter is not provided
     #if requried, if no params are sent, we can return first 10 results
+    token_response = authObj.check_token(request)
+    if  token_response == 'Token Expired' or token_response == 'Invalid token' or token_response == 'Token not found':
+        return jsonify({'message' : token_response})
+
     param = {}
     if request.args.get("movie_name") is not None :
         param['movie_name'] = request.args.get("movie_name")
@@ -43,7 +47,7 @@ def search_movie():
 @app.route('/api/movies',methods=['POST'])
 def add_movie():
     token_response = authObj.check_token(request)
-    if  token_response == 'Token Expired' or token_response == 'Invalid token' :
+    if  token_response == 'Token Expired' or token_response == 'Invalid token' or token_response == 'Token not found':
         return jsonify({'message' : token_response}) 
     if not is_admin(token_response) :
         return jsonify({'error' : 'Unauhorized'}),403
@@ -59,7 +63,7 @@ def add_movie():
 @app.route('/api/movies/<movie_id>',methods=['PUT'])
 def edit_movie(movie_id):
     token_response = authObj.check_token(request)
-    if  token_response == 'Token Expired' or token_response == 'Invalid token' :
+    if  token_response == 'Token Expired' or token_response == 'Invalid token' or token_response == 'Token not found':
         return jsonify({'message' : token_response})
     if not is_admin(token_response) : 
         return jsonify({'error' : 'Unauthorized'}),403
@@ -78,7 +82,7 @@ def edit_movie(movie_id):
 @app.route('/api/movies/<movie_id>',methods=['DELETE'])
 def delete_movie(movie_id) :
     token_response = authObj.check_token(request)
-    if  token_response == 'Token Expired' or token_response == 'Invalid token' :
+    if  token_response == 'Token Expired' or token_response == 'Invalid token' or token_response == 'Token not found':
         return jsonify({'message' : token_response})
     if not is_admin(token_response) :
         return jsonify({'error' : 'Unauthorized'}),403
@@ -91,7 +95,7 @@ def delete_movie(movie_id) :
 @app.route('/api/movies/<movie_id>',methods=['GET'])
 def get_movie(movie_id):
     token_response = authObj.check_token(request)
-    if  token_response == 'Token Expired' or token_response == 'Invalid token' :
+    if  token_response == 'Token Expired' or token_response == 'Invalid token' or token_response == 'Token not found':
         return jsonify({'message' : token_response})
     if not movie_id.isdigit():
         return jsonify({'error' : 'Invalid movie id'})

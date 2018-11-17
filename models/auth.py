@@ -9,6 +9,8 @@ class Auth() :
     def check_token (self,req) :
         try :
             #print req
+            if 'authorization' not in req.headers :
+                return 'Token not found'
             header = req.headers['authorization']
             bearer = header.split(' ')
             token = bearer[1]
@@ -16,7 +18,8 @@ class Auth() :
             return response
         except Exception as ins :
             print ins
-            return False
+            return 'Invalid token'
+
     def encode_auth_token(self,user_id,is_admin=0) :
         try :
             SECRET_KEY = os.getenv('IMDB_SECRET_KEY')
