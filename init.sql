@@ -16,7 +16,7 @@ CREATE TABLE `imdb_movie`.`users` (
 
 CREATE TABLE `imdb_movie`.`movies` (
   `movie_id` INT NOT NULL AUTO_INCREMENT,
-  `movie_name` VARCHAR(45) NOT NULL,
+  `movie_name` VARCHAR(100) NOT NULL,
   `movie_director` VARCHAR(45) NOT NULL,
   `movie_99_popularity` DECIMAL(6,3) NOT NULL,
   `movie_genre` VARCHAR(100) NOT NULL,
@@ -26,8 +26,8 @@ CREATE TABLE `imdb_movie`.`movies` (
   UNIQUE INDEX `movie_name_UNIQUE` (`movie_name` ASC));
 
 
-INSERT INTO `imdb_movie`.`users` (`user_id`, `username`, `phone`, `email`, `token`, `is_admin`) VALUES ('1', 'kadamb', '911234567890', 'k@k.com', '46a3635656d81e4ff9a01867806bd3fb0abf95f5ba7cc5a37ba4bb3a4b359aad', '1');
-INSERT INTO `imdb_movie`.`users` (`user_id`, `username`, `phone`, `email`, `token`, `is_admin`) VALUES ('2', 'kaluskar', '910987654321', 'j@j.com', '46a3635656d81e4ff9a01867806bd3fb0abf95f5ba7cc5a37ba4bb3a4b359aad', '0');
+INSERT INTO `imdb_movie`.`users` (`user_id`, `username`, `phone`, `email`, `password`, `is_admin`) VALUES ('1', 'kadamb', '911234567890', 'k@k.com', '46a3635656d81e4ff9a01867806bd3fb0abf95f5ba7cc5a37ba4bb3a4b359aad', '1');
+INSERT INTO `imdb_movie`.`users` (`user_id`, `username`, `phone`, `email`, `password`, `is_admin`) VALUES ('2', 'kaluskar', '910987654321', 'j@j.com', '46a3635656d81e4ff9a01867806bd3fb0abf95f5ba7cc5a37ba4bb3a4b359aad', '0');
 
 INSERT INTO `imdb_movie`.`movies` (`movie_id`, `movie_name`, `movie_director`, `movie_99_popularity`, `movie_genre`, `movie_imdb_score`) VALUES (NULL, 'The Wizard of Oz', 'Victor Fleming', '83.0', 'Adventure,Family,Fantasy,Musical', '8.3');
 INSERT INTO `imdb_movie`.`movies` (`movie_id`, `movie_name`, `movie_director`, `movie_99_popularity`, `movie_genre`, `movie_imdb_score`) VALUES (NULL, 'Star Wars', 'George Lucas', '88.0', 'Action,Adventure,Fantasy,Sci-Fi', '8.8');
