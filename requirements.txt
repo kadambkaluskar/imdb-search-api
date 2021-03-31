@@ -12,7 +12,7 @@ gunicorn==19.5.0
 html5lib==0.999
 httplib2==0.18.0
 lockfile==0.8
-lxml==3.3.3
+lxml==4.6.3
 mysql-connector-python
 numpy==1.8.2
 pycrypto==2.6.1
